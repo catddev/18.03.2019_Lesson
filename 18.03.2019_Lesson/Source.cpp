@@ -67,7 +67,9 @@ struct ticket {
 // Описать структуру Student(фамилия, группа, дата поступления).
 // Проиллюстрировать работу с этим классом.
 struct Date {
-	int day, month, year;
+	int day;
+	int month;
+	int year;
 };
 struct Student {
 	char surname[30];
@@ -259,14 +261,13 @@ int main()
 		{
 			ifstream in_file("in3.txt");
 			Student *s;
-			Date *regist;
+			//Date *d;
 			int n;
 			in_file >> n;
 			s = new Student[n];
-			regist = new Date[n];
-
+			//d = new Date[n];
 			for (int i = 0; i < n; i++)
-				in_file >> s[i].surname >> s[i].group >> regist[i].day >> regist[i].month >> regist[i].year;
+				in_file >> s[i].surname >> s[i].group >> s[i].regist.day >> s[i].regist.month >> s[i].regist.year;
 				
 			for(int i=0; i<n; i++)
 				s[i].print();
