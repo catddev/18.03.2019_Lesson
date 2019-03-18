@@ -72,7 +72,7 @@ struct Date {
 	void print() {
 		cout << day << "." << month << "." << year << endl;
 	}
-};
+}regist; //?
 struct Student {
 	char surname[30];
 	char group[10];
@@ -81,6 +81,7 @@ struct Student {
 	void print() { // метод для печати
 		cout << endl;
 		cout << surname << " " << group << " " << endl;
+		regist.print();
 	}
 };
 
