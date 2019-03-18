@@ -57,7 +57,7 @@ struct ticket {
 	char date[11];
 	int price;
 
-	void print() { // метод для печати
+	void print() {
 		cout << endl;
 		cout << route << " " << time << " " << date << " " << price << endl;;
 	}
@@ -68,23 +68,14 @@ struct ticket {
 // Проиллюстрировать работу с этим классом.
 struct Date {
 	int day, month, year;
-	///*void enter() {
-	//	cin >> day >> month >> year;
-	//}*/
-	//void print() {
-	//	//cin >> day >> month >> year;
-	//	cout << day << "." << month << "." << year << endl;
-	//}
 };
 struct Student {
 	char surname[30];
 	char group[10];
 	Date regist;
 
-	void print() { // метод для печати
-		cout << endl;
+	void print() {
 		cout << surname << " " << group << " ";
-		//regist.enter();
 		cout << regist.day << "." << regist.month << "." << regist.year << endl;
 	}
 };
@@ -275,10 +266,8 @@ int main()
 			regist = new Date[n];
 
 			for (int i = 0; i < n; i++)
-			{
 				in_file >> s[i].surname >> s[i].group >> regist[i].day >> regist[i].month >> regist[i].year;
 				
-			}
 			for(int i=0; i<n; i++)
 				s[i].print();
 
