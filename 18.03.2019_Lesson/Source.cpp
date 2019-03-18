@@ -68,23 +68,26 @@ struct ticket {
 // Проиллюстрировать работу с этим классом.
 struct Date {
 	int day, month, year;
-	void enter() {
-		cin >> day >> month >> year;
-	}
-	void print() {
-		cout << day << "." << month << "." << year << endl;
-	}
+	///*void enter() {
+	//	cin >> day >> month >> year;
+	//}*/
+	//void print() {
+	//	//cin >> day >> month >> year;
+	//	cout << day << "." << month << "." << year << endl;
+	//}
 };
 struct Student {
 	char surname[30];
 	char group[10];
-	Date regist;
+	Date *regist;
+	cin >> n;
+	regist = new Date[n];
 
 	void print() { // метод для печати
 		cout << endl;
 		cout << surname << " " << group << " ";
-		regist.enter();
-		regist.print();
+		//regist.enter();
+		cout << regist.day << "." << regist.month << "." << regist.year << endl;
 	}
 };
 
@@ -267,18 +270,19 @@ int main()
 		{
 			ifstream in_file("in3.txt");
 			Student *s;
-			//Date *d;
+			Date *regist;
 			int n;
 			in_file >> n;
 			s = new Student[n];
-			//d = new Date[n];
+			regist = new Date[n];
 
 			for (int i = 0; i < n; i++)
 			{
-				in_file >> s[i].surname >> s[i].group;
-				//in_file >> d[i].day >> d[i].month >> d[i].year;
-				s[i].print();
+				in_file >> s[i].surname >> s[i].group >> regist[i].day >> regist[i].month >> regist[i].year;
+				
 			}
+			for(int i=0; i<n; i++)
+				s[i].print();
 
 
 
