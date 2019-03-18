@@ -4,6 +4,7 @@
 #include<ctime>
 #include<cstring>
 #include<fstream>
+#include<Windows.h>
 
 using namespace std;
 
@@ -25,12 +26,71 @@ struct student {
 			cout << grades[i] << " ";
 		cout << endl;
 	}
+	bool otlichniki() {
+		int k = 0;
+		for (int i = 0; i < 5; i++)
+			if (grades[i] >= 10)
+				k++;
+		if (double(k) / 5 >= 0.75) return true;
+		else return false;
+	}
+	bool dvoechniki() {
+		int k = 0;
+		for (int i = 0; i < 5; i++)
+			if (grades[i] <= 6)
+				k++;
+		if (double(k) / 5 >= 0.5) return true;
+		else return false;
+	}
+};
+
+//2.	Описать структуру билет (название маршрута, время, дата, стоимость).
+// А) *Создать экземпляр структуры билет и написать для него функции заполнения и печати.
+// Б) **Создать массив билетов и написать  программу, позволяющую:
+// -динамически изменять размер массива;
+// -выводить список билетов на конкретную дату;
+// -выводить список  билетов не дороже определенной суммы;
+// -печать всего списка билетов.
+struct ticket {
+	char route[30];
+	char time[6];
+	char date[11];
+	int price;
+
+	void print() { // метод для печати
+		cout << endl;
+		cout << route << " " << time << " " << date << " " << price << endl;;
+	}
+};
+
+//**Описать структуру Data(день, месяц, год).
+// Описать структуру Student(фамилия, группа, дата поступления).
+// Проиллюстрировать работу с этим классом.
+struct Date {
+	int day, month, year;
+
+	void print() {
+		cout << day << "." << month << "." << year << endl;
+	}
+};
+struct Student {
+	char surname[30];
+	char group[10];
+	Date regist;
+
+	void print() { // метод для печати
+		cout << endl;
+		cout << surname << " " << group << " " << endl;
+	}
 };
 
 
 
 int main()
 {
+	SetConsoleCP(1251); // ввод
+	SetConsoleOutputCP(1251); // и вывод на русском на консоли
+
 	srand(time(NULL));
 
 	setlocale(LC_ALL, "Rus");
@@ -114,6 +174,7 @@ int main()
 			ifstream in_file("in.txt");
 			student *s;
 			int n;
+			char c;
 			in_file >> n;
 			s = new student[n];
 			for (int i = 0; i < n; i++)
@@ -125,16 +186,96 @@ int main()
 				}
 				s[i].print();
 			}
+			cout << "Enter character to search" << endl;
+			cin >> c;
+			for (int i = 0; i < n; i++)
+				if (s[i].name[0] == c) // проверка первой буквы имени
+					s[i].print();
+
+		//**Описать структуру Student(фамилия, группа, успеваемость(массив из 5 int)).
+		// Создать массив студентов и написать программу, позволяющую:
+		//-динамически изменять размер массива;
+		//-выводить список отличников(> 75 % отл оценок);
+		//-выводить список двоечников(> 50 % оценок 2 и 3);
+			cout << "Отличники:" << endl;
+			for (int i = 0; i < n; i++)
+				if (s[i].otlichniki() == true)
+					s[i].print();
+
+			cout << "Двоечники:" << endl;
+			for (int i = 0; i < n; i++)
+				if (s[i].dvoechniki() == true)
+					s[i].print();
+			
 			delete[] s;
 		}
 		break;
 		case 5:
 		{
+			ifstream in_file("in2.txt");
+			ticket *t;
+			int n;
+			in_file >> n;
+			t = new ticket[n];
 
+			for (int i = 0; i < n; i++)
+			{
+				in_file >> t[i].route >> t[i].time >> t[i].date >> t[i].price;
+			}
+
+			int choice;
+			while (true)
+			{
+				cout << "Enter 1 to search by date" << endl;
+				cout << "Enter 2 to search by price" << endl;
+				cout << "Enter 3 to print all" << endl;
+				cout << "Enter 0 to exit" << endl;
+				cin >> choice;
+				if (choice == 0) break;
+				switch (choice)
+				{
+				case 1:
+					char d[11];
+					cout << "Enter needed date" << endl;
+					cin >> d;
+					for (int i = 0; i < n; i++)
+						if (strcmp(d, t[i].date) == 0)
+							t[i].print();
+				break;
+				case 2:
+					int p;
+					cout << "Enter needed price" << endl;
+					cin >> p;
+					for (int i = 0; i < n; i++)
+						if (p >= t[i].price)
+							t[i].print();
+
+				break;
+				case 3:
+					for (int i = 0; i < n; i++)
+						t[i].print();
+				break;
+				}
+			}
 		}
 		break;
 		case 6:
 		{
+			ifstream in_file("in3.txt");
+			Student *s;
+			Date *d;
+			int n;
+			in_file >> n;
+			s = new Student[n];
+			d = new Date[n];
+
+			for (int i = 0; i < n; i++)
+			{
+				in_file >> s[i].surname >> s[i].group;
+				in_file >> d[i].day >> d[i].month >> d[i].year;
+			}
+
+
 
 		}
 		break;
