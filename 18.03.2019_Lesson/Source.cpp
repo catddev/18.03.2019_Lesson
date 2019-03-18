@@ -79,9 +79,7 @@ struct Date {
 struct Student {
 	char surname[30];
 	char group[10];
-	Date *regist;
-	cin >> n;
-	regist = new Date[n];
+	Date regist;
 
 	void print() { // метод для печати
 		cout << endl;
