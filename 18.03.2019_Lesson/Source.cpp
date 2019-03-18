@@ -78,7 +78,12 @@ struct Student {
 
 	void print() {
 		cout << surname << " " << group << " ";
-		cout << regist.day << "." << regist.month << "." << regist.year << endl;
+		if (regist.month > 10)
+			cout << regist.day << "0." << regist.month << "." << regist.year << endl;
+		if (regist.day > 10)
+			cout << "0" << regist.day << "." << regist.month << "." << regist.year << endl;
+		else 
+			cout << regist.day << "." << regist.month << "." << regist.year << endl;
 	}
 };
 
@@ -261,11 +266,10 @@ int main()
 		{
 			ifstream in_file("in3.txt");
 			Student *s;
-			//Date *d;
 			int n;
 			in_file >> n;
 			s = new Student[n];
-			//d = new Date[n];
+			
 			for (int i = 0; i < n; i++)
 				in_file >> s[i].surname >> s[i].group >> s[i].regist.day >> s[i].regist.month >> s[i].regist.year;
 				
